@@ -1,0 +1,15 @@
+assemble:
+    - from: build/static
+      into: static
+kanban-objects:
+    htmlElementName: kanban-objects
+    instanceable: true
+    name: Kanban Objects
+    portletCategoryName: category.client-extensions
+    type: customElement
+    urls:
+        - js/main.*.js
+        - js/*.chunk.js
+    cssURLs:
+        - css/main.*.css
+    useESM: true
