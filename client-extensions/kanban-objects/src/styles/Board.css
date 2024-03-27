@@ -13,7 +13,7 @@
 }
 
 .kanban-board-for-objects .card-title {
-  color: var(--color-brand-primary, #5924eb);
+  color: var(--color-brand-primary-darken-2, #320e95);
 }
 
 .kanban-board-for-objects .droppable-container.dragging-over {
