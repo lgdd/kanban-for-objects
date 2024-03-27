@@ -3,21 +3,20 @@
   gap: 1rem;
 }
 
-.kanban-board-for-objects .card {
-  min-height: 400px;
+.kanban-board-for-objects .droppable-container {
+  height: 550px;
+  overflow: scroll;
+}
+
+.kanban-board-for-objects .card-header {
+  background-color: var(--color-brand-primary-lighten-6, #fbfaff);
 }
 
 .kanban-board-for-objects .card-title {
   color: var(--color-brand-primary, #5924eb);
-  margin-bottom: 1rem;
-}
-
-.kanban-board-for-objects .droppable-container {
-  min-height: 400px;
 }
 
 .kanban-board-for-objects .droppable-container.dragging-over {
-  /* background-color: var(--color-brand-secondary-lighten-5, #fff1ce); */
   background-color: var(--color-state-success-lighten-2, #e6f1e6);
 }
 
