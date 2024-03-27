@@ -56,7 +56,6 @@ function App({ objectDefinitionId, objectDefinitionERC }) {
 
   return (
     <div>
-      <p>{isLoading}</p>
       {isLoading &&
         <Loading size="md" />
       }
