@@ -1,9 +1,9 @@
 const objectIsEmpty = (object) => {
-  return Object.keys(object).length === 0
+  return object === undefined || Object.keys(object).length === 0
 }
 
 const objectIsNotEmpty = (object) => {
-  return Object.keys(object).length > 0
+  return object !== undefined && Object.keys(object).length > 0
 }
 
 // https://stackoverflow.com/a/21149072
