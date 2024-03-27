@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/lgdd/kanban-objects/compare/v1.0.0...v1.1.0) (2024-03-27)
+
+
+### Features
+
+* new detailed message when updating ([b5eddd6](https://github.com/lgdd/kanban-objects/commit/b5eddd62e0f6fc3abed85f136fe46d7f9f9c8aad))
+
+
+### Performance Improvements
+
+* improve drag'n'drop ([34ca63c](https://github.com/lgdd/kanban-objects/commit/34ca63ccc310c67e01ef9bd8a32a25ea871ce4b5))
+
 ## 1.0.0 (2024-03-27)
 
 
