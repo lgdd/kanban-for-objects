@@ -4,13 +4,7 @@ const LiferayService = {
       try {
         const response = await window['Liferay'].Util.fetch(url);
         const data = response.json();
-        if (data.status) {
-          window['Liferay'].Util.openToast({
-            title: data.status,
-            message: 'An error occured.',
-            type: 'danger',
-          });
-        } else {
+        if (response.ok) {
           return data;
         }
       } catch (error) {
@@ -33,14 +27,14 @@ const LiferayService = {
           headers: [['content-type', 'application/json']],
         });
         const data = response.json();
-        if (data.status) {
+        if (response.ok) {
+          return data;
+        } else {
           window['Liferay'].Util.openToast({
             title: data.status,
             message: 'An error occured.',
             type: 'danger',
           });
-        } else {
-          return data;
         }
       } catch (error) {
         console.error(error);
@@ -62,18 +56,18 @@ const LiferayService = {
           headers: [['content-type', 'application/json']],
         });
         const data = response.json();
-        if (data.status) {
-          window['Liferay'].Util.openToast({
-            title: data.status,
-            message: 'An error occured.',
-            type: 'danger',
-          });
-        } else {
+        if (response.ok) {
           window['Liferay'].Util.openToast({
             message: 'Your request has been completed.',
             type: 'success',
           });
           return data;
+        } else {
+          window['Liferay'].Util.openToast({
+            title: data.status,
+            message: 'An error occured.',
+            type: 'danger',
+          });
         }
       } catch (error) {
         console.error(error);
@@ -95,14 +89,14 @@ const LiferayService = {
           headers: [['content-type', 'application/json']],
         });
         const data = response.json();
-        if (data.status) {
+        if (response.ok) {
+          return data;
+        } else {
           window['Liferay'].Util.openToast({
             title: data.status,
             message: 'An error occured.',
             type: 'danger',
           });
-        } else {
-          return data;
         }
       } catch (error) {
         console.error(error);
@@ -122,14 +116,14 @@ const LiferayService = {
           method: `DELETE`,
         });
         const data = response.json();
-        if (data.status) {
+        if (response.ok) {
+          return data;
+        } else {
           window['Liferay'].Util.openToast({
             title: data.status,
             message: 'An error occured.',
             type: 'danger',
           });
-        } else {
-          return data;
         }
       } catch (error) {
         console.error(error);
