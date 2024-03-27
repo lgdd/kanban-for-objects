@@ -61,7 +61,7 @@ const Board = ({ objectDefinition }) => {
     <>
       {!isLoading &&
         <DragDropContext onDragEnd={onDragEnd}>
-          <h1>{objectDefinition[objectDefinition.titleObjectFieldName]}</h1>
+          <h1>{objectDefinition.name}</h1>
           <div className="kanban-board-for-objects d-flex flex-row align-items-start justify-content-between">
             {states && states.map((state, index) => {
               return <State
