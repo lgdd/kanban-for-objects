@@ -47,7 +47,7 @@ const LiferayService = {
       console.error("Liferay (JS Object) doesn't exist.");
     }
   },
-  patch: async (url, payload) => {
+  patch: async (url, payload, options) => {
     if (typeof window['Liferay'] != 'undefined') {
       try {
         const response = await window['Liferay'].Util.fetch(url, {
@@ -58,14 +58,14 @@ const LiferayService = {
         const data = response.json();
         if (response.ok) {
           window['Liferay'].Util.openToast({
-            message: 'Your request has been completed.',
+            message: (options && options["message"]["success"]) || 'Your request has been completed.',
             type: 'success',
           });
           return data;
         } else {
           window['Liferay'].Util.openToast({
             title: data.status,
-            message: 'An error occured.',
+            message: (options && options["message"]["error"]) || 'An error occured.',
             type: 'danger',
           });
         }

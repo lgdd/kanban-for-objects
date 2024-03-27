@@ -4,7 +4,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import LiferayService from '../services/liferay';
 import '../styles/Board.css';
 import State from './State';
-import { findObjectById, objectIsNotEmpty, updateObjectInList } from '../services/utils';
+import { camelCaseToWords, findObjectById, objectIsNotEmpty, updateObjectInList } from '../services/utils';
 import Icon from './Icon';
 
 const Board = ({ objectDefinition }) => {
@@ -27,7 +27,11 @@ const Board = ({ objectDefinition }) => {
         newObject[objectDefinition.titleObjectFieldName] = currentObject[objectDefinition.titleObjectFieldName];
         const updatedObjects = updateObjectInList(newObject, objects);
         setObjects(updatedObjects);
-        const data = await LiferayService.patch(`${objectURL}/${objectId}`, newObject);
+        const data = await LiferayService.patch(`${objectURL}/${objectId}`, newObject, {
+          message: {
+            success: `${newObject[objectDefinition.titleObjectFieldName]} is now '${camelCaseToWords(newObject.state.key)}'`,
+          }
+        });
         if (!data) {
           const updatedObjects = updateObjectInList(currentObject, objects);
           setObjects(updatedObjects);
