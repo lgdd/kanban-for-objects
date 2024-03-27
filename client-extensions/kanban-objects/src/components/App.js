@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import LiferayService from '../services/liferay';
 import Select from './Select';
 import Board from './Board';
-import { objectIsNotEmpty } from '../services/utils';
+import { findObjectById, objectIsNotEmpty } from '../services/utils';
 import Loading from './Loading';
 
 function App({ objectDefinitionId, objectDefinitionERC }) {
@@ -10,19 +10,10 @@ function App({ objectDefinitionId, objectDefinitionERC }) {
   const [objectDefinitions, setObjectDefinitions] = useState([]);
   const [objectDefinition, setObjectDefinition] = useState({});
 
-  const getObjectDefinitionById = (id) => {
-    for (let i = 0; i < objectDefinitions.length; i++) {
-      if (id === objectDefinitions[i].id) {
-        return objectDefinitions[i];
-      }
-    }
-    return {};
-  }
-
   const handleSelectChange = (e) => {
     e.preventDefault();
     const objectDefinitionId = parseInt(e.target.value);
-    const objectDefinition = getObjectDefinitionById(objectDefinitionId);
+    const objectDefinition = findObjectById(objectDefinitionId, objectDefinitions);
     setObjectDefinition(objectDefinition);
   }
 

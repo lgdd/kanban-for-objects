@@ -13,12 +13,22 @@ const camelCaseToWords = (str) => {
   }).join(' ');
 }
 
-const reorder = (list, startIndex, endIndex) => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
+const findObjectById = (id, list) => {
+  for (let i = 0; i < list.length; i++) {
+    if (id === list[i].id) {
+      return list[i];
+    }
+  }
+  return {};
+}
 
-  return result;
-};
+const updateObjectInList = (object, list) => {
+  return list.map((item) => {
+    if(item.id === object.id) {
+     return object;
+    }
+    return item;
+  });
+}
 
-export { objectIsEmpty, objectIsNotEmpty, camelCaseToWords, reorder };
+export { objectIsEmpty, objectIsNotEmpty, camelCaseToWords, findObjectById, updateObjectInList };

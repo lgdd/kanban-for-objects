@@ -4,7 +4,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import LiferayService from '../services/liferay';
 import '../styles/Board.css';
 import State from './State';
-import { objectIsNotEmpty } from '../services/utils';
+import { findObjectById, objectIsNotEmpty, updateObjectInList } from '../services/utils';
 import Icon from './Icon';
 
 const Board = ({ objectDefinition }) => {
@@ -14,20 +14,24 @@ const Board = ({ objectDefinition }) => {
 
   const onDragEnd = async (result) => {
     if (result.destination != null) {
-      const objectId = result.draggableId;
+      const objectId = parseInt(result.draggableId);
       const objectURL = objectDefinition.restContextPath;
       const objectCurrentState = result.source.droppableId;
       const objectNewState = result.destination.droppableId;
+      const currentObject = findObjectById(objectId, objects);
       if (objectNewState !== objectCurrentState) {
-        const payload = { "state": { "key": objectNewState } };
-        await LiferayService.patch(`${objectURL}/${objectId}`, payload);
-        let searchParams = new URLSearchParams();
-        searchParams.set("pageSize", 1);
-        searchParams.set("fields", `id,state,${objectDefinition.titleObjectFieldName}`);
-        let response = await LiferayService.get(`${objectDefinition.restContextPath}?${searchParams.toString()}`);
-        searchParams.set("pageSize", response.totalCount);
-        response = await LiferayService.get(`${objectDefinition.restContextPath}?${searchParams.toString()}`);
-        setObjects(response.items);
+        const newObject = {
+          "id": currentObject.id,
+          "state": { "key": objectNewState }
+        };
+        newObject[objectDefinition.titleObjectFieldName] = currentObject[objectDefinition.titleObjectFieldName];
+        const updatedObjects = updateObjectInList(newObject, objects);
+        setObjects(updatedObjects);
+        const data = await LiferayService.patch(`${objectURL}/${objectId}`, newObject);
+        if (!data) {
+          const updatedObjects = updateObjectInList(currentObject, objects);
+          setObjects(updatedObjects);
+        }
       }
     }
   }

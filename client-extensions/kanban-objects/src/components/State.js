@@ -6,7 +6,7 @@ import Object from "./Object";
 const State = ({ state, objects, objectDefinition, numberOfStates }) => {
   return (
     <div key={state.id} className="card" style={{ minWidth: `${100 / numberOfStates}%` }}>
-      <div class="card-header">
+      <div className="card-header">
         <h2 className="card-title" >{camelCaseToWords(state.key)}</h2>
       </div>
       <Droppable droppableId={state.key}>

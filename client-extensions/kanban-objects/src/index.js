@@ -13,9 +13,9 @@ class WebComponent extends HTMLElement {
       objectDefinitionERC: this.getAttribute('erc'),
     };
     root.render(
-      <React.StrictMode>
+      // <React.StrictMode>
         <App {...props} />
-      </React.StrictMode>
+      // </React.StrictMode>
     );
   }
 }
