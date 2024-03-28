@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/lgdd/kanban-objects/compare/v1.1.0...v1.1.1) (2024-03-28)
+
+
+### Bug Fixes
+
+* **ci:** correct release name for upload ([953cf67](https://github.com/lgdd/kanban-objects/commit/953cf67222c2434944c47f90c2e82f70206ed50d))
+
 ## [1.1.0](https://github.com/lgdd/kanban-objects/compare/v1.0.0...v1.1.0) (2024-03-27)
 
 
