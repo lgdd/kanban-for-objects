@@ -63,9 +63,9 @@ const LiferayService = {
           });
           return data;
         } else {
+          const error = await data;
           window['Liferay'].Util.openToast({
-            title: data.status,
-            message: (options && options["message"]["error"]) || 'An error occured.',
+            message: (options && options["message"]["error"]) || error.title,
             type: 'danger',
           });
         }
