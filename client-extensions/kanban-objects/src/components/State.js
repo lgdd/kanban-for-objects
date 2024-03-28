@@ -7,7 +7,7 @@ const State = ({ state, objects, objectDefinition, numberOfStates }) => {
   return (
     <div key={state.id} className="card" style={{ minWidth: `${100 / numberOfStates}%` }}>
       <div className="card-header">
-        <h2 className="card-title" >{camelCaseToWords(state.key)}</h2>
+        <h3 className="card-title" >{camelCaseToWords(state.key)}</h3>
       </div>
       <Droppable droppableId={state.key}>
         {(provided, snapshot) => (

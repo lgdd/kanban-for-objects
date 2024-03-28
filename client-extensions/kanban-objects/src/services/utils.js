@@ -31,4 +31,14 @@ const updateObjectInList = (object, list) => {
   });
 }
 
-export { objectIsEmpty, objectIsNotEmpty, camelCaseToWords, findObjectById, updateObjectInList };
+const getStateFields = (objectDefinition) => {
+  const stateFields = [];
+  for (let i = 0; i < objectDefinition.objectFields.length; i++) {
+    if (objectDefinition.objectFields[i].state) {
+      stateFields.push( objectDefinition.objectFields[i]);
+    }
+  }
+  return stateFields;
+}
+
+export { objectIsEmpty, objectIsNotEmpty, camelCaseToWords, findObjectById, updateObjectInList, getStateFields };

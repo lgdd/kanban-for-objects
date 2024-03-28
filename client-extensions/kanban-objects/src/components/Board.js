@@ -4,10 +4,10 @@ import { DragDropContext } from "react-beautiful-dnd";
 import LiferayService from '../services/liferay';
 import '../styles/Board.css';
 import State from './State';
-import { camelCaseToWords, findObjectById, objectIsNotEmpty, updateObjectInList } from '../services/utils';
+import { camelCaseToWords, findObjectById, updateObjectInList } from '../services/utils';
 import Icon from './Icon';
 
-const Board = ({ objectDefinition }) => {
+const Board = ({ objectDefinition, objectStates, numberOfStateFields, stateFieldName }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [states, setStates] = useState([]);
   const [objects, setObjects] = useState([]);
@@ -42,20 +42,12 @@ const Board = ({ objectDefinition }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let stateField = {};
-      for (let i = 0; i < objectDefinition.objectFields.length; i++) {
-        if (objectDefinition.objectFields[i].state) {
-          stateField = objectDefinition.objectFields[i];
-          break;
-        }
-      }
-      if (objectIsNotEmpty(stateField)) {
-        let response = await LiferayService.get(`/o/object-admin/v1.0/object-fields/${stateField.id}`);
-        setStates(response.objectFieldSettings[0].value.objectStates);
+      if (objectStates && objectStates.length > 0) {
+        setStates(objectStates);
         let searchParams = new URLSearchParams();
         searchParams.set("pageSize", 1);
         searchParams.set("fields", `id,state,${objectDefinition.titleObjectFieldName}`);
-        response = await LiferayService.get(`${objectDefinition.restContextPath}?${searchParams.toString()}`);
+        let response = await LiferayService.get(`${objectDefinition.restContextPath}?${searchParams.toString()}`);
         searchParams.set("pageSize", response.totalCount);
         response = await LiferayService.get(`${objectDefinition.restContextPath}?${searchParams.toString()}`);
         setObjects(response.items);
@@ -63,13 +55,13 @@ const Board = ({ objectDefinition }) => {
       setIsLoading(false);
     };
     fetchData();
-  }, [objectDefinition]);
+  }, [objectDefinition, objectStates]);
 
   return (
     <>
       {!isLoading &&
         <DragDropContext onDragEnd={onDragEnd}>
-          <h1>{objectDefinition.name}</h1>
+          {numberOfStateFields > 1 && <h2>{stateFieldName}</h2>}
           <div className="kanban-board-for-objects d-flex flex-row align-items-start justify-content-between">
             {states && states.map((state, index) => {
               return <State

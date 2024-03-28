@@ -2,19 +2,21 @@ import { useEffect, useState } from 'react';
 import LiferayService from '../services/liferay';
 import Select from './Select';
 import Board from './Board';
-import { findObjectById, objectIsNotEmpty } from '../services/utils';
+import { camelCaseToWords, findObjectById, getStateFields, objectIsNotEmpty } from '../services/utils';
 import Loading from './Loading';
 
 function App({ objectDefinitionId, objectDefinitionERC }) {
   const [isLoading, setIsLoading] = useState(true);
   const [objectDefinitions, setObjectDefinitions] = useState([]);
   const [objectDefinition, setObjectDefinition] = useState({});
+  const [stateFields, setStateFields] = useState([]);
 
   const handleSelectChange = (e) => {
     e.preventDefault();
     const objectDefinitionId = parseInt(e.target.value);
     const objectDefinition = findObjectById(objectDefinitionId, objectDefinitions);
     setObjectDefinition(objectDefinition);
+    setStateFields(getStateFields(objectDefinition));
   }
 
   useEffect(() => {
@@ -22,6 +24,7 @@ function App({ objectDefinitionId, objectDefinitionERC }) {
       const fetchData = async () => {
         const response = await LiferayService.get(`/o/object-admin/v1.0/object-definitions/${objectDefinitionId}`);
         setObjectDefinition(response);
+        setStateFields(getStateFields(response));
         setIsLoading(false);
       };
       fetchData();
@@ -29,6 +32,7 @@ function App({ objectDefinitionId, objectDefinitionERC }) {
       const fetchData = async () => {
         const response = await LiferayService.get(`/o/object-admin/v1.0/object-definitions/by-external-reference-code/${objectDefinitionERC}`);
         setObjectDefinition(response);
+        setStateFields(getStateFields(response));
         setIsLoading(false);
       };
       fetchData();
@@ -54,7 +58,20 @@ function App({ objectDefinitionId, objectDefinitionERC }) {
         <Select items={objectDefinitions} onChangeHandler={handleSelectChange} />
       }
       {!isLoading && objectIsNotEmpty(objectDefinition) &&
-        <Board objectDefinition={objectDefinition} />
+        <h1>{objectDefinition.name}</h1>
+      }
+      {!isLoading && objectIsNotEmpty(objectDefinition) &&
+        stateFields.map((stateField, index) => {
+          return (
+            <Board
+              key={index}
+              objectDefinition={objectDefinition}
+              objectStates={stateField.objectFieldSettings[0].value.objectStates}
+              numberOfStateFields={stateFields.length}
+              stateFieldName={camelCaseToWords(stateField.name)}
+            />
+          )
+        })
       }
     </div>
   );
