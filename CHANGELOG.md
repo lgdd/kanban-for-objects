@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/lgdd/kanban-objects/compare/v1.1.1...v1.2.0) (2024-03-28)
+
+
+### Features
+
+* supports objects with multiple state fields ([f006191](https://github.com/lgdd/kanban-objects/commit/f006191ced04b1b71ec5999ccd2499f9f22e124f))
+
 ## [1.1.1](https://github.com/lgdd/kanban-objects/compare/v1.1.0...v1.1.1) (2024-03-28)
 
 
