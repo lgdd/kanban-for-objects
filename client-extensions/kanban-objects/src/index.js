@@ -12,11 +12,7 @@ class WebComponent extends HTMLElement {
       objectDefinitionId: this.getAttribute('id'),
       objectDefinitionERC: this.getAttribute('erc'),
     };
-    root.render(
-      // <React.StrictMode>
-        <App {...props} />
-      // </React.StrictMode>
-    );
+    root.render(<App {...props} />);
   }
 }
 
