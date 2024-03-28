@@ -1,6 +1,6 @@
 # Kanban Objects
 
-A client extension for Liferay to manage in a Kanban board any custom Object with a state.
+A client extension for Liferay to manage in a Kanban board any custom Object with states.
 
 ![preview](https://github.com/lgdd/doc-assets/blob/main/kanban-objects/kanban-objects-2.png?raw=true)
 
