@@ -4,6 +4,11 @@ A client extension for Liferay to manage in a Kanban board any custom Object wit
 
 ![preview](https://github.com/lgdd/doc-assets/blob/main/kanban-objects/kanban-objects-2.png?raw=true)
 
+## Requirement
+
+Only object definitions with at least one Picklist field mark as a state are supported. For example:
+![preview](https://github.com/lgdd/doc-assets/blob/main/kanban-objects/kanban-objects-4.png?raw=true)
+
 ## Configuration
 
 By default, you can select an Object definition and it will display a board according to the states for that definition:
