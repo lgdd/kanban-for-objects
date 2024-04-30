@@ -27,4 +27,4 @@
 /plugins-sdk/dist
 /plugins-sdk/lib
 test-results
-.liferay-pid
+liferay.pid
