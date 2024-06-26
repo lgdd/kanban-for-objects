@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/lgdd/kanban-objects/compare/v1.2.0...v1.2.1) (2024-06-26)
+
+
+### Bug Fixes
+
+* state management issue ([768068a](https://github.com/lgdd/kanban-objects/commit/768068a1b9c436384f542847878bfdef14df3467))
+
 ## [1.2.0](https://github.com/lgdd/kanban-objects/compare/v1.1.1...v1.2.0) (2024-03-28)
 
 
