@@ -35,7 +35,7 @@ const getStateFields = (objectDefinition) => {
   const stateFields = [];
   for (let i = 0; i < objectDefinition.objectFields.length; i++) {
     if (objectDefinition.objectFields[i].state) {
-      stateFields.push( objectDefinition.objectFields[i]);
+      stateFields.push(objectDefinition.objectFields[i]);
     }
   }
   return stateFields;

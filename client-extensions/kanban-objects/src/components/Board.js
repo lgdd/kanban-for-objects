@@ -7,7 +7,7 @@ import State from './State';
 import { camelCaseToWords, findObjectById, updateObjectInList } from '../services/utils';
 import Icon from './Icon';
 
-const Board = ({ objectDefinition, objectStates, numberOfStateFields, stateFieldName }) => {
+const Board = ({ objectDefinition, objectStates, numberOfStateFields, stateField }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [states, setStates] = useState([]);
   const [objects, setObjects] = useState([]);
@@ -22,14 +22,14 @@ const Board = ({ objectDefinition, objectStates, numberOfStateFields, stateField
       if (objectNewState !== objectCurrentState) {
         const newObject = {
           "id": currentObject.id,
-          "state": { "key": objectNewState }
+          [stateField.name]: { "key": objectNewState }
         };
         newObject[objectDefinition.titleObjectFieldName] = currentObject[objectDefinition.titleObjectFieldName];
         const updatedObjects = updateObjectInList(newObject, objects);
         setObjects(updatedObjects);
         const data = await LiferayService.patch(`${objectURL}/${objectId}`, newObject, {
           message: {
-            success: `${newObject[objectDefinition.titleObjectFieldName]} is now '${camelCaseToWords(newObject.state.key)}'`,
+            success: `${newObject[objectDefinition.titleObjectFieldName]} is now '${camelCaseToWords(newObject[stateField.name].key)}'`,
           }
         });
         if (!data) {
@@ -46,7 +46,7 @@ const Board = ({ objectDefinition, objectStates, numberOfStateFields, stateField
         setStates(objectStates);
         let searchParams = new URLSearchParams();
         searchParams.set("pageSize", 1);
-        searchParams.set("fields", `id,state,${objectDefinition.titleObjectFieldName}`);
+        searchParams.set("fields", `id,${stateField.name},${objectDefinition.titleObjectFieldName}`);
         let response = await LiferayService.get(`${objectDefinition.restContextPath}?${searchParams.toString()}`);
         searchParams.set("pageSize", response.totalCount);
         response = await LiferayService.get(`${objectDefinition.restContextPath}?${searchParams.toString()}`);
@@ -55,17 +55,18 @@ const Board = ({ objectDefinition, objectStates, numberOfStateFields, stateField
       setIsLoading(false);
     };
     fetchData();
-  }, [objectDefinition, objectStates]);
+  }, [objectDefinition, objectStates, stateField]);
 
   return (
     <>
       {!isLoading &&
         <DragDropContext onDragEnd={onDragEnd}>
-          {numberOfStateFields > 1 && <h2>{stateFieldName}</h2>}
+          {numberOfStateFields > 1 && <h2>{camelCaseToWords(stateField.name)}</h2>}
           <div className="kanban-board-for-objects d-flex flex-row align-items-start justify-content-between">
             {states && states.map((state, index) => {
               return <State
                 key={index}
+                stateField={stateField}
                 state={state}
                 numberOfStates={states.length}
                 objectDefinition={objectDefinition}

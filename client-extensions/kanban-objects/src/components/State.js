@@ -3,7 +3,7 @@ import { Droppable } from "react-beautiful-dnd";
 import { camelCaseToWords } from '../services/utils';
 import Object from "./Object";
 
-const State = ({ state, objects, objectDefinition, numberOfStates }) => {
+const State = ({ state, objects, objectDefinition, numberOfStates, stateField }) => {
   return (
     <div key={state.id} className="card" style={{ minWidth: `${100 / numberOfStates}%` }}>
       <div className="card-header">
@@ -13,7 +13,7 @@ const State = ({ state, objects, objectDefinition, numberOfStates }) => {
         {(provided, snapshot) => (
           <div ref={provided.innerRef} {...provided.droppableProps}
             className={"card-body droppable-container" + (snapshot.isDraggingOver ? " dragging-over" : "")}>
-            {objects && objects.filter((object) => { return object.state.key === state.key }).map((object, index) => {
+            {objects && objects.filter((object) => { return object[stateField.name].key === state.key }).map((object, index) => {
               return <Object
                 key={index}
                 index={index}

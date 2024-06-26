@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import LiferayService from '../services/liferay';
 import Select from './Select';
 import Board from './Board';
-import { camelCaseToWords, findObjectById, getStateFields, objectIsNotEmpty } from '../services/utils';
+import { findObjectById, getStateFields, objectIsNotEmpty } from '../services/utils';
 import Loading from './Loading';
 
 function App({ objectDefinitionId, objectDefinitionERC }) {
@@ -68,7 +68,7 @@ function App({ objectDefinitionId, objectDefinitionERC }) {
               objectDefinition={objectDefinition}
               objectStates={stateField.objectFieldSettings[0].value.objectStates}
               numberOfStateFields={stateFields.length}
-              stateFieldName={camelCaseToWords(stateField.name)}
+              stateField={stateField}
             />
           )
         })
