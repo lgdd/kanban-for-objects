@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 
-const ELEMENT_ID = 'kanban-objects';
+const ELEMENT_ID = 'kanban-for-objects';
 
 class WebComponent extends HTMLElement {
   connectedCallback() {

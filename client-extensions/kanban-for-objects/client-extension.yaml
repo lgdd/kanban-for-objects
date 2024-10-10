@@ -1,10 +1,10 @@
 assemble:
     - from: build/static
       into: static
-kanban-objects:
-    htmlElementName: kanban-objects
+kanban-for-objects:
+    htmlElementName: kanban-for-objects
     instanceable: true
-    name: Kanban Objects
+    name: Kanban for Objects
     portletCategoryName: category.client-extensions
     type: customElement
     urls:
