@@ -1,4 +1,4 @@
-# Kanban Objects
+# Kanban for Objects
 
 A client extension for Liferay to manage in a Kanban board any custom Object with states.
 
